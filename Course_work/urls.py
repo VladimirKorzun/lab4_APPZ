@@ -8,10 +8,10 @@ schema_view = get_schema_view(title='Pastebin API')
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'snippets', views.SnippetViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'restaurant', views.RestaurantViewSet)
 router.register(r'dish', views.DishViewSet)
+router.register(r'comment', views.CommentViewSet)
 
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.

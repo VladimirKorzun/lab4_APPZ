@@ -3,15 +3,6 @@ from rest_framework import serializers
 from restourant.models import *
 
 
-class SnippetSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-    highlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight', format='html')
-
-    class Meta:
-        model = Snippet
-        fields = ('url', 'id', 'highlight', 'owner',
-                  'title', 'code', 'linenos', 'language', 'style')
-
 
 class RestouranSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -24,6 +15,12 @@ class DishSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Dish
         fields = ('url', 'id', 'name', 'price','restourant','description','owner', 'image')
+
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        model = Comment
+        fields = ('url', 'id', 'username', 'text','restourant','date','owner')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail', read_only=True)
